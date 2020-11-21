@@ -23,7 +23,7 @@ cell[-5:, -3] = ""
 uwords = np.array(["カジキ", "サバ", "キツネ", "カバーニ", "ウニ", "ウズラ", "ライオン", "コアラ"])
 # %%
 fig, [axl, axr] = plt.subplots(1, 2, figsize=(16, 7.5), gridspec_kw=dict(width_ratios=[9,7], wspace=-0.1))
-axl = si.get_board(axl, cell, title="テストパズル", is_answer=True)
+axl = si.get_board(axl, cell, title="テストパズル", w_count=len(uwords), is_answer=True)
 axr = si.get_wordlist(axr, uwords)
 plt.show()
 # %%
