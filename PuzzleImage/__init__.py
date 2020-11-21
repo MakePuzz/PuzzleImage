@@ -1,2 +1,2 @@
-from PuzzleImage import PuzzleImage
-from PuzzleImage import SkeltonImage
+from puzzleimage.PuzzleImage import PuzzleImage
+from puzzleimage.SkeltonImage import SkeltonImage
