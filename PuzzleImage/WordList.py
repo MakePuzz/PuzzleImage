@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import japanize_matplotlib
 
 
 class WordList:
@@ -107,7 +108,6 @@ class WordList:
             x_text = (self.w_lens[self.w_num-1]) * 0.05
         ax.text(x_text, -0.01, '© MakePuzz', size=18, ha='right', fontname='Yu Gothic', alpha=0.5, fontweight='bold')
     
-
     def _get_char_num_per_row(self, row_num, col_num):
         if col_num == 2:
             char_num_per_row = self.w_lens[self.row_num-1] + self.w_lens[self.w_num-1] + 2
@@ -136,7 +136,7 @@ class WordList:
                     label_labelline_spacing=0.01, label_box_spacing=0.027, label_word_spacing=0.06,
                     label_color="dimgray", box_size=0.015, box_fc="#f5efe6", box_ec="darkgray", box_pad=0.005,
                     labelline_color="lightgray"):
-        """draw a self.words column on plt.ax"""
+        """draw word columns on the matplotlib.pyplot.axes"""
         if separate_space:
             ax.axhline(y = y_offset+0.038, color=labelline_color, xmin=label_x-0.02, xmax=0.99, lw=2, ls=':')
         nwords = len(words)

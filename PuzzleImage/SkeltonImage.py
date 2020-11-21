@@ -6,9 +6,10 @@ from puzzleimage.PuzzleImage import PuzzleImage
 from puzzleimage.Board import Board
 from puzzleimage.WordList import WordList
 
+
 class SkeltonImage(PuzzleImage):
     def __init__(self, blank="", *args, **kwargs):
-        super().__init__(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.blank = blank
     
     def get_board(self, ax, cell, title="", is_answer=False):
