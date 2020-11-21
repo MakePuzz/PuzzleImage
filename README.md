@@ -1,2 +1,2 @@
-# PuzzleImage
-PuzzleImage is a repository for making puzzle images.
+# puzzleimage
+puzzleimage is a repository for making puzzle images.
