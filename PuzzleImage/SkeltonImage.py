@@ -1,13 +1,44 @@
+import numpy as np
 import matplotlib.pyplot as plt
+import japanize_matplotlib
 
-from puzzleimage import PuzzleImage
+from puzzleimage.PuzzleImage import PuzzleImage
+from puzzleimage.Board import Board
+from puzzleimage.WordList import WordList
 
 class SkeltonImage(PuzzleImage):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, blank="", *args, **kwargs):
         super().__init__(args, kwargs)
+        self.blank = blank
     
-    def get_board(self, ax, cell):
+    def get_board(self, ax, cell, title="", is_answer=False):
+        """
+        Create a puzzle board axes.
+        
+        Parameters
+        ----------
+        ax : matplotlib.pyplot.axes
+            Axes to be plotted.
+        cell : numpy ndarray
+            Puzzle board.
+        title : str, default ""
+            Puzzle name.
+        is_answer : bool, default False
+            If True, draw with the answer.
+        """
+        board = Board(cell, self.blank)
+        ax = board.draw_board(ax)
+        ax = self._draw_title(ax, title, x=0.1, y=board.height + 0.2, size=16, ha="left", color="#1a1a1a")
+                
+        if is_answer:
+            ax = board.draw_answer(ax, cell, size=18, ha="center", va="center")
         return ax
 
-    def get_wordlist(self, ax, wordlist):
+    def _draw_title(slef, ax, title, x, y, **kwargs):
+        ax.text(x, y, str(title), **kwargs)
+        return ax
+    
+    def get_wordlist(self, ax, words, char_max_per_row=21):
+        wl = WordList(words, char_max_per_row=char_max_per_row)
+        ax = wl.draw_wordlist(ax)
         return ax
