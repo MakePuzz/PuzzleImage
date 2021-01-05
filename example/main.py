@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 import sys
 sys.path.append("../")
-from Puzzleimage import SkeltonImage
+from PuzzleImage import SkeltonImage
 
 # %reload_ext autoreload
 # %autoreload 2
