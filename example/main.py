@@ -1,11 +1,12 @@
 #%%
-import numpy as np
-import matplotlib.pyplot as plt
-
-
 import sys
+
+import matplotlib.pyplot as plt
+import numpy as np
+
 sys.path.append("../")
 from PuzzleImage import SkeltonImage
+
 
 # %reload_ext autoreload
 # %autoreload 2

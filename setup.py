@@ -2,9 +2,9 @@
 # -*- coding:utf-8 -*-
 from __future__ import absolute_import
 from __future__ import unicode_literals
-import os
+
+from numpy.distutils.core import setup
 from setuptools import find_packages
-from numpy.distutils.core import setup, Extension
 
 try:
     with open('README.md') as f:
@@ -12,8 +12,10 @@ try:
 except IOError:
     readme = ''
 
+
 def _requires_from_file(filename):
     return open(filename).read().splitlines()
+
 
 extensions = []
 setup(

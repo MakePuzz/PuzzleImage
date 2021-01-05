@@ -1,9 +1,5 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import japanize_matplotlib
-
-from PuzzleImage.PuzzleImage import PuzzleImage
 from PuzzleImage.Board import Board
+from PuzzleImage.PuzzleImage import PuzzleImage
 from PuzzleImage.WordList import WordList
 
 
@@ -11,7 +7,7 @@ class SkeltonImage(PuzzleImage):
     def __init__(self, blank="", *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.blank = blank
-    
+
     def get_board(self, ax, cell, title=None, w_count=None, is_answer=False):
         """
         Create a puzzle board axes.
@@ -32,7 +28,8 @@ class SkeltonImage(PuzzleImage):
         if title:
             ax = self._draw_title(ax, title, x=0.1, y=board.height + 0.2, size=16, ha="left", color="#1a1a1a")
         if w_count:
-            ax = self._draw_title(ax, f"{w_count}語", x=board.width, y=board.height + 0.1, size=12, ha="right", color="#1a1a1a")   
+            ax = self._draw_title(ax, f"{w_count}語", x=board.width, y=board.height + 0.1, size=12, ha="right",
+                                  color="#1a1a1a")
         if is_answer:
             ax = board.draw_answer(ax, cell, size=18, ha="center", va="center")
         return ax
@@ -44,7 +41,7 @@ class SkeltonImage(PuzzleImage):
     def _draw_word_count(slef, ax, count, x, y, **kwargs):
         ax.text(x, y, str(count), **kwargs)
         return ax
-    
+
     def get_wordlist(self, ax, words, char_max_per_row=21):
         wl = WordList(words, char_max_per_row=char_max_per_row)
         ax = wl.draw_wordlist(ax)
