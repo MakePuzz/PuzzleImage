@@ -2,10 +2,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from puzzleimage import SkeltonImage
 
-%reload_ext autoreload
-%autoreload 2
+import sys
+sys.path.append("../")
+from Puzzleimage import SkeltonImage
+
+# %reload_ext autoreload
+# %autoreload 2
 
 si = SkeltonImage(blank="")
 

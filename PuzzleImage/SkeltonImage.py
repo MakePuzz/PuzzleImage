@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import japanize_matplotlib
 
-from puzzleimage.PuzzleImage import PuzzleImage
-from puzzleimage.Board import Board
-from puzzleimage.WordList import WordList
+from PuzzleImage.PuzzleImage import PuzzleImage
+from PuzzleImage.Board import Board
+from PuzzleImage.WordList import WordList
 
 
 class SkeltonImage(PuzzleImage):
@@ -32,7 +32,7 @@ class SkeltonImage(PuzzleImage):
         if title:
             ax = self._draw_title(ax, title, x=0.1, y=board.height + 0.2, size=16, ha="left", color="#1a1a1a")
         if w_count:
-            ax = self._draw_title(ax, f"{w_count}語", x=board.width - 0.8, y=board.height + 0.1, size=12, ha="left", color="#1a1a1a")   
+            ax = self._draw_title(ax, f"{w_count}語", x=board.width, y=board.height + 0.1, size=12, ha="right", color="#1a1a1a")   
         if is_answer:
             ax = board.draw_answer(ax, cell, size=18, ha="center", va="center")
         return ax
