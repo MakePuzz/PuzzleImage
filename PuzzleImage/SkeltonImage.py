@@ -42,7 +42,7 @@ class SkeltonImage(PuzzleImage):
         ax.text(x, y, str(count), **kwargs)
         return ax
 
-    def get_wordlist(self, ax, words, char_max_per_row=21):
-        wl = WordList(words, char_max_per_row=char_max_per_row)
+    def get_wordlist(self, ax, words, width, height, size):
+        wl = WordList(words, width, height, size)
         ax = wl.draw_wordlist(ax)
         return ax
