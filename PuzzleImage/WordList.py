@@ -43,7 +43,7 @@ class WordList:
             "difx": 0.45 * self.fontsize / 30, # difference from word_x to draw the label line
             "width": 3 * self.fontsize / 30, # line width
             "space": self.char_max_per_row / self.row_num,
-            "ymin_dif": 0.15 * self.fontsize / 30 , # coefficient of ymin when drawing a label
+            "ymin_dif": self.fontsize/ 72 * 0.8 , # coefficient of ymin when drawing a label
             "ymax_dif": 0.05 * self.fontsize / 30 # coefficient of ymax when drawing a label
         }
         
@@ -73,14 +73,14 @@ class WordList:
                     ax.text(word_x-label["difx"], word_y-label["dify"], str(self.w_lens[k]), fontsize=label["size"], color=label["color"], ha="right")
                 # label line
                 if i != 0 and self.w_lens[k] > self.w_lens[k-1]:
-                    ymin = (word_y + labelline["ymin_dif"]) / self.height
+                    ymin = (self.height * 0.995 - (i-1) * self.inch_of(self.fontsize) * labelline["space"] - labelline["ymin_dif"]) / self.height
                     ax.axvline(x=word_x-labelline["difx"], color="lightgray", ymin=ymin, ymax=ymax, lw=labelline["width"])
                     ymax = (word_y - labelline["ymax_dif"]) / self.height
                 k += 1
             if j == self.col_num-1 and k == self.w_num and self.w_num%self.row_num != 0 :
-                ymin = (self.height*0.995 - self.inch_of(self.fontsize) * i * labelline["space"] + labelline["ymin_dif"]) / self.height
+                ymin = (self.height*0.995 - self.inch_of(self.fontsize) * (i-1) * labelline["space"] - labelline["ymin_dif"]) / self.height
             else:
-                ymin = (self.height*0.995 - self.inch_of(self.fontsize) * (i+1) * labelline["space"] + labelline["ymin_dif"]) / self.height
+                ymin = (self.height*0.995 - self.inch_of(self.fontsize) * (i) * labelline["space"] - labelline["ymin_dif"]) / self.height
             ax.axvline(x=word_x-labelline["difx"], color="lightgray", ymin=ymin, ymax=ymax, lw=labelline["width"])
             
             # puzzle copyright
