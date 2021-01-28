@@ -24,25 +24,25 @@ class WordList:
         ax.set(xlim=(0, self.width), ylim=(0, self.height))
         ax.axis("off")
 
-        # write list
+	    # write list
         box = {
             "fc": "#f5efe6", # facecolor
             "ec": "darkgray", # edgecolor
             "style": mpatches.BoxStyle("Round", pad=0.05*self.size/30),
-            "size": 0.1 * self.size / 30,
-            "difx": 0.25 * self.size / 30, # difference from word_x to draw box
-            "dify": 0.2 * self.size / 30, # difference from word_y to draw box
+            "size": 0.15 * self.size / 30,
+            "difx": 0.3 * self.size / 30, # difference from word_x to draw box
+            "dify": 0.25 * self.size / 30, # difference from word_y to draw box
         }
         label = {
-            "difx": 0.45* self.size / 30, # difference from word_x to draw the label
+            "difx": 0.55* self.size / 30, # difference from word_x to draw the label
             "dify": 0.2 * self.size / 30, # difference from word_y to draw the label
             "size": 14 * self.size / 30, # label font size
-            "ymin_dif": 0.15 * self.size / 30, # coefficient of ymin when drawing a label
-            "ymax_dif": 0.10 * self.size / 30, # coefficient of ymax when drawing a label
+            "ymin_dif": 0.15 * self.size / 30 , # coefficient of ymin when drawing a label
+            "ymax_dif": 0.05 * self.size / 30, # coefficient of ymax when drawing a label
             "color": "dimgray",
         }
         line = {
-            "difx": 0.4 * self.size / 30, # difference from word_x to draw the label line
+            "difx": 0.45 * self.size / 30, # difference from word_x to draw the label line
             "width": 3 * self.size / 30, # line width
             "space": self.char_max_per_row / self.row_num
         }
