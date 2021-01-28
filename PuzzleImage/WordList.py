@@ -43,7 +43,7 @@ class WordList:
             "difx": 0.45 * self.fontsize / 30, # difference from word_x to draw the label line
             "width": 3 * self.fontsize / 30, # line width
             "space": self.char_max_per_row / self.row_num,
-            "ymin_dif": self.fontsize/ 72 * 0.8 , # coefficient of ymin when drawing a label
+            "ymin_dif": self.inch_of(self.fontsize) * 0.8 , # coefficient of ymin when drawing a label
             "ymax_dif": 0.05 * self.fontsize / 30 # coefficient of ymax when drawing a label
         }
         
