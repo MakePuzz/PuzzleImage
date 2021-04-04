@@ -10,13 +10,14 @@ class WordList:
         self.fontsize = fontsize
         self.inch_of = lambda size: fontsize / 72
         self.words = np.array(sorted(words, key=lambda word: (len(word), word)))
-        self.w_lens = np.vectorize(len)(words)
         self.w_num = len(self.words)
         self.row_num = int(height / self.inch_of(fontsize)) - 1
         self.char_max_per_row = int(height / self.inch_of(fontsize)) - 1
         self.col_num = int(np.ceil(self.w_num / self.row_num))
-        # redefine row number
-        self.row_num = int(np.ceil(self.w_num / self.col_num))  # row number
+        if self.w_num != 0:
+            self.w_lens = np.vectorize(len)(words)
+            # redefine row number
+            self.row_num = int(np.ceil(self.w_num / self.col_num))  # row number
 
 
     def draw_wordlist(self, ax):
@@ -24,6 +25,10 @@ class WordList:
         ax.set(xlim=(0, self.width), ylim=(0, self.height))
         ax.axis("off")
 
+        if self.w_num != 0:
+            ax.text(self.width, 0, '© MakePuzz', size=self.fontsize, ha='right', va='bottom', fontname='Yu Gothic', alpha=0.5, fontweight='bold')
+            exit()
+            
 	    # write list
         box = {
             "fc": "#f5efe6", # facecolor
