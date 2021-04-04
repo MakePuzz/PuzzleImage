@@ -25,7 +25,7 @@ class WordList:
         ax.set(xlim=(0, self.width), ylim=(0, self.height))
         ax.axis("off")
 
-        if self.w_num != 0:
+        if self.w_num == 0:
             ax.text(self.width, 0, '© MakePuzz', size=self.fontsize, ha='right', va='bottom', fontname='Yu Gothic', alpha=0.5, fontweight='bold')
             exit()
             
@@ -93,3 +93,12 @@ class WordList:
         
         return ax
 
+    def cal_width(self):
+
+        word_x = self.inch_of(self.fontsize) * 2
+        for j in range(self.col_num):
+            if j > 0:
+                word_x += (self.w_lens[self.row_num * j] + 2) * self.inch_of(self.fontsize)
+        word_x += (self.w_lens[self.w_num - 1]) * self.inch_of(self.fontsize)
+                
+        return word_x

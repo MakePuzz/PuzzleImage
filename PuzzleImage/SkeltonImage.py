@@ -46,3 +46,8 @@ class SkeltonImage(PuzzleImage):
         wl = WordList(words, width, height, size)
         ax = wl.draw_wordlist(ax)
         return ax
+
+    def get_width(self, ax, words, width, height, size):
+        wl = WordList(words, width, height, size)
+        widthinch = wl.cal_width()
+        return widthinch
