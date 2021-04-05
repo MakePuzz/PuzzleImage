@@ -11,7 +11,7 @@ class WordList:
         self.inch_of = lambda size: fontsize / 72
         self.words = np.array(sorted(words, key=lambda word: (len(word), word)))
         self.w_num = len(self.words)
-        self.row_num = int(height / self.inch_of(fontsize)) - 8
+        self.row_num = int(height / self.inch_of(fontsize)) - 9
         self.char_max_per_row = int(height / self.inch_of(fontsize)) - 1
         self.col_num = int(np.ceil(self.w_num / self.row_num))
         if self.w_num != 0:
@@ -48,7 +48,7 @@ class WordList:
             "difx": 0.45 * self.fontsize / 30, # difference from word_x to draw the label line
             "width": 3 * self.fontsize / 30, # line width
             # "space": self.char_max_per_row / (int(self.height / self.inch_of(self.fontsize)) - 6),
-            "space": 1.3,
+            "space": 1.4,
             "ymin_dif": self.inch_of(self.fontsize) * 0.8 , # coefficient of ymin when drawing a label
             "ymax_dif": 0.05 * self.fontsize / 30 # coefficient of ymax when drawing a label
         }
