@@ -20,7 +20,7 @@ def _requires_from_file(filename):
 extensions = []
 setup(
     name="puzzleimage",
-    version="0.0.4",
+    version="0.0.5",
     url='https://github.com/MakePuzz/puzzleimage',
     author='The puzzle-japan Team',
     author_email='puzzle.hokkaido@gmail.com',
