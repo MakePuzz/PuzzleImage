@@ -15,7 +15,7 @@ class WordList:
         self.char_max_per_row = int(height / self.inch_of(fontsize)) - 1
         self.col_num = int(np.ceil(self.w_num / self.row_num))
         if self.w_num != 0:
-	    self.w_lens = np.vectorize(len)(self.words)
+            self.w_lens = np.vectorize(len)(self.words)
             # redefine row number
             self.row_num = int(np.ceil(self.w_num / self.col_num))  # row number
 
