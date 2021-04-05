@@ -11,7 +11,7 @@ class WordList:
         self.inch_of = lambda size: fontsize / 72
         self.words = np.array(sorted(words, key=lambda word: (len(word), word)))
         self.w_num = len(self.words)
-        self.row_num = int(height / self.inch_of(fontsize)) - 9
+        self.row_num = int(height / self.inch_of(fontsize) * 19 / 28)
         self.char_max_per_row = int(height / self.inch_of(fontsize)) - 1
         self.col_num = int(np.ceil(self.w_num / self.row_num))
         if self.w_num != 0:
@@ -25,9 +25,10 @@ class WordList:
         ax.set(xlim=(0, self.width), ylim=(0, self.height))
         ax.axis("off")
 
+        ax.text(self.width, 0, '© MakePuzz', size=self.fontsize, ha='right', va='bottom', fontname='Yu Gothic', alpha=0.5, fontweight='bold')
+
         if self.w_num == 0:
-            ax.text(self.width, 0, '© MakePuzz', size=self.fontsize, ha='right', va='bottom', fontname='Yu Gothic', alpha=0.5, fontweight='bold')
-            exit()
+            return ax
             
 	    # write list
         box = {
@@ -89,9 +90,6 @@ class WordList:
                 ymin = (self.height*0.995 - self.inch_of(self.fontsize) * (i) * labelline["space"] - labelline["ymin_dif"]) / self.height
             ax.axvline(x=word_x-labelline["difx"], color="lightgray", ymin=ymin, ymax=ymax, lw=labelline["width"])
             
-            # puzzle copyright
-        ax.text(self.width, 0, '© MakePuzz', size=self.fontsize, ha='right', va='bottom', fontname='Yu Gothic', alpha=0.5, fontweight='bold')
-        
         return ax
 
     def cal_width(self):

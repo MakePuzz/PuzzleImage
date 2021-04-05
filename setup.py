@@ -20,9 +20,9 @@ def _requires_from_file(filename):
 extensions = []
 setup(
     name="puzzleimage",
-    version="0.0.7",
+    version="0.0.8",
     url='https://github.com/MakePuzz/puzzleimage',
-    author='The puzzle-japan Team',
+    author='MakePuzz',
     author_email='puzzle.hokkaido@gmail.com',
     maintainer='MakePuzz',
     maintainer_email='puzzle.hokkaido@gmail.com',
@@ -36,6 +36,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: Microsoft :: Windows',
     ]
