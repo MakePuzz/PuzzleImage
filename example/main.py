@@ -3,6 +3,7 @@ import sys
 
 import matplotlib.pyplot as plt
 import numpy as np
+import japanize_matplotlib
 
 sys.path.append("../")
 from PuzzleImage import SkeltonImage
@@ -28,6 +29,6 @@ uwords = np.array(["カジキ", "サバ", "キツネ", "カバーニ", "ウニ",
 # %%
 fig, [axl, axr] = plt.subplots(1, 2, figsize=(16, 7.5), gridspec_kw=dict(width_ratios=[9,7], wspace=-0.1))
 axl = si.get_board(axl, cell, title="テストパズル", w_count=len(uwords), is_answer=True)
-axr = si.get_wordlist(axr, uwords)
+axr = si.get_wordlist(axr, uwords, width=8, height=7.5, size=17)
 plt.show()
 # %%
