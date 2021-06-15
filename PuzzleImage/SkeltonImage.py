@@ -42,12 +42,12 @@ class SkeltonImage(PuzzleImage):
         ax.text(x, y, str(count), **kwargs)
         return ax
 
-    def get_wordlist(self, ax, words, width, height, size):
-        wl = WordList(words, width, height, size)
+    def get_wordlist(self, ax, **kwargs):
+        wl = WordList(**kwargs)
         ax = wl.draw_wordlist(ax)
         return ax
 
-    def get_width(self, words, width, height, size):
-        wl = WordList(words, width, height, size)
+    def get_width(self, **kwargs):
+        wl = WordList(**kwargs)
         widthinch = wl.cal_width()
         return widthinch

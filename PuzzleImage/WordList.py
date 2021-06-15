@@ -3,11 +3,15 @@ import matplotlib.patches as mpatches
 import numpy as np
 
 class WordList:
-    def __init__(self, words, width, height, fontsize):
+    def __init__(self, words, width, height, fontsize, draw_box=True, draw_label=True, draw_labelline=True, draw_copyright=True):
 
         self.width = width
         self.height = height
         self.fontsize = fontsize
+        self.draw_box = draw_box
+        self.draw_label = draw_label
+        self.draw_labelline = draw_labelline
+        self.draw_copyright = draw_copyright
         self.inch_of = lambda size: fontsize / 72
         self.words = np.array(sorted(words, key=lambda word: (len(word), word)))
         self.w_num = len(self.words)
@@ -21,11 +25,11 @@ class WordList:
 
 
     def draw_wordlist(self, ax):
-       
         ax.set(xlim=(0, self.width), ylim=(0, self.height))
         ax.axis("off")
 
-        ax.text(self.width, 0, '© MakePuzz', size=self.fontsize, ha='right', va='bottom', fontname='Yu Gothic', alpha=0.5, fontweight='bold')
+        if self.draw_copyright is True:
+            ax.text(self.width, 0, '© MakePuzz', size=self.fontsize, ha='right', va='bottom', fontname='Yu Gothic', alpha=0.5, fontweight='bold')
 
         if self.w_num == 0:
             return ax
@@ -55,9 +59,7 @@ class WordList:
         }
         
 
-        # k: array number of words
-        # j: column number
-        # i: row number
+        # k: array number of words, j: column number, i: row number
         k = 0
         word_x = self.inch_of(self.fontsize) * 2
         ymax_default = (self.height * 0.995 - labelline["ymax_dif"]) / self.height
@@ -68,32 +70,36 @@ class WordList:
             for i in range(self.row_num):
                 if k == self.w_num:
                     break
-                # box
                 word_y = self.height * 0.995 - i * self.inch_of(self.fontsize) * labelline["space"]
-                fancybox = mpatches.FancyBboxPatch((word_x-box["difx"], word_y-box["dify"]), box["size"], box["size"], boxstyle=box["style"], fc=box["fc"], ec=box["ec"], alpha=1)
-                ax.add_patch(fancybox)
+                # box
+                if self.draw_box is True:
+                    fancybox = mpatches.FancyBboxPatch((word_x-box["difx"], word_y-box["dify"]), box["size"], box["size"], boxstyle=box["style"], fc=box["fc"], ec=box["ec"], alpha=1)
+                    ax.add_patch(fancybox)
+
                 # main word
                 ax.text(word_x, word_y, self.words[k], size=self.fontsize, ha="left", va="top")
 
                 # label
-                if k == 0 or self.w_lens[k] > self.w_lens[k-1]:
-                    ax.text(word_x-label["difx"], word_y-label["dify"], str(self.w_lens[k]), fontsize=label["size"], color=label["color"], ha="right")
+                if self.draw_label is True:
+                    if k == 0 or self.w_lens[k] > self.w_lens[k-1]:
+                        ax.text(word_x-label["difx"], word_y-label["dify"], str(self.w_lens[k]), fontsize=label["size"], color=label["color"], ha="right")
+                
                 # label line
-                if i != 0 and self.w_lens[k] > self.w_lens[k-1]:
-                    ymin = (self.height * 0.995 - (i-1) * self.inch_of(self.fontsize) * labelline["space"] - labelline["ymin_dif"]) / self.height
-                    ax.axvline(x=word_x-labelline["difx"], color="lightgray", ymin=ymin, ymax=ymax, lw=labelline["width"])
-                    ymax = (word_y - labelline["ymax_dif"]) / self.height
+                if self.draw_labelline is True:
+                    if i != 0 and self.w_lens[k] > self.w_lens[k-1]:
+                        ymin = (self.height * 0.995 - (i-1) * self.inch_of(self.fontsize) * labelline["space"] - labelline["ymin_dif"]) / self.height
+                        ax.axvline(x=word_x-labelline["difx"], color="lightgray", ymin=ymin, ymax=ymax, lw=labelline["width"])
+                        ymax = (word_y - labelline["ymax_dif"]) / self.height
                 k += 1
-            if j == self.col_num-1 and k == self.w_num and self.w_num%self.row_num != 0 :
-                ymin = (self.height*0.995 - self.inch_of(self.fontsize) * (i-1) * labelline["space"] - labelline["ymin_dif"]) / self.height
-            else:
-                ymin = (self.height*0.995 - self.inch_of(self.fontsize) * (i) * labelline["space"] - labelline["ymin_dif"]) / self.height
-            ax.axvline(x=word_x-labelline["difx"], color="lightgray", ymin=ymin, ymax=ymax, lw=labelline["width"])
-            
+            if self.draw_labelline is True:
+                if j == self.col_num-1 and k == self.w_num and self.w_num%self.row_num != 0 :
+                    ymin = (self.height*0.995 - self.inch_of(self.fontsize) * (i-1) * labelline["space"] - labelline["ymin_dif"]) / self.height
+                else:
+                    ymin = (self.height*0.995 - self.inch_of(self.fontsize) * (i) * labelline["space"] - labelline["ymin_dif"]) / self.height
+                ax.axvline(x=word_x-labelline["difx"], color="lightgray", ymin=ymin, ymax=ymax, lw=labelline["width"])            
         return ax
 
     def cal_width(self):
-
         word_x = self.inch_of(self.fontsize) * 2
         for j in range(self.col_num):
             if j > 0:
