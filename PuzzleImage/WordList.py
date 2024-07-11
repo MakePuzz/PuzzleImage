@@ -3,8 +3,7 @@ import matplotlib.patches as mpatches
 import numpy as np
 
 class WordList:
-    def __init__(self, words, width, height, fontsize, draw_box=True, draw_label=True, draw_labelline=True, draw_copyright=True):
-
+    def __init__(self, words, width, height, fontsize, draw_box=True, draw_label=True, draw_labelline=True, draw_copyright=True, copyright_fontname=None):
         self.width = width
         self.height = height
         self.fontsize = fontsize
@@ -12,7 +11,8 @@ class WordList:
         self.draw_label = draw_label
         self.draw_labelline = draw_labelline
         self.draw_copyright = draw_copyright
-        self.inch_of = lambda size: fontsize / 72
+        self.copyright_fontname = copyright_fontname
+        self.inch_of = lambda size: size / 72
         self.words = np.array(sorted(words, key=lambda word: (len(word), word)))
         self.w_num = len(self.words)
         self.row_num = int(height / self.inch_of(fontsize) * 19 / 28)
@@ -28,13 +28,10 @@ class WordList:
         ax.set(xlim=(0, self.width), ylim=(0, self.height))
         ax.axis("off")
 
-        if self.draw_copyright is True:
-            ax.text(self.width, 0, '© MakePuzz', size=self.fontsize, ha='right', va='bottom', fontname='Yu Gothic', alpha=0.5, fontweight='bold')
-
         if self.w_num == 0:
             return ax
             
-	    # write list
+        # write list
         box = {
             "fc": "#f5efe6", # facecolor
             "ec": "darkgray", # edgecolor
@@ -65,7 +62,7 @@ class WordList:
         ymax_default = (self.height * 0.995 - labelline["ymax_dif"]) / self.height
         for j in range(self.col_num):
             if j > 0:
-                word_x += (self.w_lens[self.row_num * j] + 2) * self.inch_of(self.fontsize)
+                word_x += (self.w_lens[self.row_num * j] + 3.5) * self.inch_of(self.fontsize)
             ymax = ymax_default
             for i in range(self.row_num):
                 if k == self.w_num:
@@ -97,6 +94,10 @@ class WordList:
                 else:
                     ymin = (self.height*0.995 - self.inch_of(self.fontsize) * (i) * labelline["space"] - labelline["ymin_dif"]) / self.height
                 ax.axvline(x=word_x-labelline["difx"], color="lightgray", ymin=ymin, ymax=ymax, lw=labelline["width"])            
+
+        if self.draw_copyright is True:
+            # ax.text(self.width, 0, '© MakePuzz', size=self.fontsize, ha='right', va='bottom', fontname=self.copyright_fontname, alpha=0.5, fontweight='bold')
+            ax.text(ax.texts[-1].get_position()[0], 0, '© MakePuzz', size=self.fontsize, ha='left', va='bottom', fontname=self.copyright_fontname, alpha=0.5, fontweight='bold')
         return ax
 
     def cal_width(self):
